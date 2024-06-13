@@ -4,3 +4,5 @@ GLOBAL_VAR_INIT(timezoneOffset, 0)
 
 GLOBAL_VAR_INIT(year, time2text(world.realtime,"YYYY"))
 GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
+
+GLOBAL_VAR_INIT(date_format, file2text('config/date_format.txt'))

@@ -31,6 +31,18 @@
 /proc/ISOtime(timevar)
 	return time2text(timevar || world.timeofday, "YYYY-MM-DD hh:mm:ss")
 
+/proc/station_date_timestamp(format = "YYYY-MM-DD", wtime)
+    if (findtextEx(format, "YYYY"))
+        var/list/layout = splittext(format, "YYYY")
+        format = layout.Join("[CURRENT_STATION_YEAR]")
+
+    if (findtextEx(format, "YY"))
+        var/list/layout = splittext(format, "YY")
+        format = layout.Join("[copytext(num2text(CURRENT_STATION_YEAR), 3, 5)]")
+
+    var/date = time2text(wtime, format)
+    return date
+
 
 GLOBAL_VAR_INIT(midnight_rollovers, 0)
 GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
