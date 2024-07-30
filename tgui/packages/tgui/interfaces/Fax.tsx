@@ -12,6 +12,7 @@ type FaxData = {
   syndicate_network: boolean;
   fax_history: FaxHistory[];
   special_faxes: FaxSpecial[];
+  pda_is_connected: boolean;
 };
 
 type FaxInfo = {
@@ -55,13 +56,23 @@ export const Fax = (props) => {
   return (
     <Window width={340} height={540}>
       <Window.Content scrollable>
-        <Section title="About Fax">
+        <Section
+          title="About Fax"
+          buttons={
+            <Button
+              icon="link-slash"
+              tooltip="Disconnect all PDA from this fax"
+              onClick={() => act('disconnect_all_pda')}
+              disabled={!data.pda_is_connected}
+            />
+          }
+        >
           <LabeledList.Item label="Network name">
             {data.fax_name}
           </LabeledList.Item>
           <LabeledList.Item label="Network ID">{data.fax_id}</LabeledList.Item>
           <LabeledList.Item label="Visible to Network">
-            {data.visible ? true : false}
+            {data.visible ? 'true' : 'false'}
           </LabeledList.Item>
         </Section>
         <Section
